@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { Provider } from "react-redux";
+// import { Provider } from "react-redux";
 import SignUp from "./Components/Auth/SignUp";
 import SignIn from "./Components/Auth/SignIn";
 import Home from "./Pages/Home/HOme";

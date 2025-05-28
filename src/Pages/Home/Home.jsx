@@ -1,13 +1,16 @@
 import React from 'react'
+import Navbar from '../../Components/Navbar/Navbar'
+import { Outlet } from 'react-router-dom'
 
 const Home = () => {
 
-  const user = localStorage.getItem("user")
-  console.log(JSON.parse(user))
+  // const user = localStorage.getItem("user")
+  // console.log(JSON.parse(user))
   
   return (
     <div>
-      Home Compoenets
+      <Navbar/>
+      <Outlet/>
     </div>
   )
 }

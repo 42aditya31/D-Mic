@@ -6,6 +6,8 @@ import SignIn from "./Components/Auth/SignIn";
 import Home from "./Pages/Home/HOme";
 import { Provider } from "react-redux";
 import appStore from "./store/appStore";
+import Body from "./Components/Body/Body";
+import Profile from "./Pages/Profile/Profile";
 
 
 const approute = createBrowserRouter([
@@ -20,7 +22,14 @@ const approute = createBrowserRouter([
   {
     path: "/",
     element: <Home />, 
-    children: [
+    children: [{
+      path:"/",
+      element:<Body/>
+    },
+    {
+      path:"/profile",
+      element:<Profile/>
+    }
      
     ],
   },

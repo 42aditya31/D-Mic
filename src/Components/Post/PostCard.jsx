@@ -1,16 +1,17 @@
+// PostCard.jsx
 import React from "react";
 import { MessageCircle, Heart } from "lucide-react";
 
-const PostCard = ({ 
-  name, 
-  profession, 
-  content, 
-  imageUrl = "", 
-  likes = 0, 
-  comments = 0 
+const PostCard = ({
+  name,
+  profession,
+  content,
+  imageUrl = "",
+  likes = 0,
+  comments = 0,
 }) => {
   return (
-    <div className="w-full max-w-xl -ml-96  right-96 bg-white border rounded-2xl p-4 shadow-sm hover:shadow-md transition">
+    <div className="w-full max-w-2xl  bg-white border rounded-2xl p-4 shadow-sm hover:shadow-md transition">
       <div className="flex items-start space-x-4">
         {/* Profile Icon Placeholder */}
         <div className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"></div>

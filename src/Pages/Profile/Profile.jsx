@@ -10,20 +10,24 @@ const Profile = () => {
   const userInfo = useFetchLoggedUser(user?.id);
 
   return (
-    <div className="flex flex-row w-full relative justify-center gap-4 px-8 py-6">
-      {/* Left Profile Card */}
-      <div className="w-80">
-        <ProfileCard
-          firstName={userInfo?.FirstName}
-          lastName={userInfo?.LastName}
-          profession={userInfo?.Proffesion}
-          email={userInfo?.email}
-          url={userInfo?.UserIcon?.url}
-        />
-      </div>
+    <div className="w-full max-h-screen flex justify-center px-4 py-6 bg-gray-50 min-h-screen">
+      <div className="w-full max-w-6xl flex flex-col md:flex-row gap-6">
+        {/* Left Sidebar */}
+        <aside className="w-full md:w-1/3 lg:w-1/4">
+          <ProfileCard
+            firstName={userInfo?.FirstName}
+            lastName={userInfo?.LastName}
+            profession={userInfo?.Proffesion}
+            email={userInfo?.email}
+            url={userInfo?.UserIcon?.url}
+          />
+        </aside>
 
-      {/* Right Posts */}
-      <ProfilePostContainer />
+        {/* Main Feed */}
+        <main className="w-full md:w-2/3 lg:w-3/4">
+          <ProfilePostContainer />
+        </main>
+      </div>
     </div>
   );
 };

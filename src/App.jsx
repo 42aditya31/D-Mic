@@ -9,6 +9,7 @@ import appStore from "./store/appStore";
 import Body from "./Components/Body/Body";
 import Profile from "./Pages/Profile/Profile";
 import ProfileCard from "./Pages/Profile/ProfileCard";
+import About from "./Pages/About/About";
 
 const approute = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const approute = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/about",
+        element: <About/>
       },
     ],
   },

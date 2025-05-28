@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import appStore from "./store/appStore";
 import Body from "./Components/Body/Body";
 import Profile from "./Pages/Profile/Profile";
-
+import ProfileCard from "./Pages/Profile/ProfileCard";
 
 const approute = createBrowserRouter([
   {
@@ -21,16 +21,16 @@ const approute = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Home />, 
-    children: [{
-      path:"/",
-      element:<Body/>
-    },
-    {
-      path:"/profile",
-      element:<Profile/>
-    }
-     
+    element: <Home />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
     ],
   },
 ]);
@@ -39,7 +39,7 @@ function App() {
   return (
     <Provider store={appStore}>
       <RouterProvider router={approute} />
-   </Provider>
+    </Provider>
   );
 }
 

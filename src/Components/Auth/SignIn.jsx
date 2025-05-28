@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux"
+import { addUserInfo } from "../../store/userSlice";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -30,6 +33,7 @@ const SignIn = () => {
 
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("user", JSON.stringify(data.user));
+      dispatch(addUserInfo(data.user))
 
       
       navigate("/");
@@ -38,6 +42,7 @@ const SignIn = () => {
       alert(error.message);
     }
   };
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">

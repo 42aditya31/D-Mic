@@ -4,6 +4,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from "./Components/Auth/SignUp";
 import SignIn from "./Components/Auth/SignIn";
 import Home from "./Pages/Home/HOme";
+import { Provider } from "react-redux";
+import appStore from "./store/appStore";
 
 
 const approute = createBrowserRouter([
@@ -26,9 +28,9 @@ const approute = createBrowserRouter([
 
 function App() {
   return (
-  
+    <Provider store={appStore}>
       <RouterProvider router={approute} />
-   
+   </Provider>
   );
 }
 

@@ -1,6 +1,8 @@
 // PostCard.jsx
 import React from "react";
 import { MessageCircle, Heart } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
+
 
 const PostCard = ({
   name,
@@ -26,7 +28,7 @@ const PostCard = ({
           </div>
 
           {/* Content */}
-          <p className="text-sm text-gray-800 mb-2 whitespace-pre-line">{content}</p>
+          <p className="text-sm text-gray-800 mb-2 whitespace-pre-line"> <ReactMarkdown>{content}</ReactMarkdown></p>
 
           {/* Optional Image */}
           {imageUrl && (

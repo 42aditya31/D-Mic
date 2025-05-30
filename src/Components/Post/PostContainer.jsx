@@ -1,52 +1,22 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import { Sparkles } from "lucide-react";
-
-const dummyPosts = [
-  {
-    id: 1,
-    name: "Aditya Sharma",
-    profession: "Full Stack Developer",
-    content: "This is a **markdown** enabled post with an image below.",
-    imageUrl: "https://via.placeholder.com/600x300",
-    likes: 10,
-    comments: 4,
-  },
-  {
-    id: 2,
-    name: "Jane Doe",
-    profession: "UI/UX Designer",
-    content: "Design is how it works. \n\n> - Steve Jobs",
-    imageUrl: "",
-    likes: 5,
-    comments: 2,
-  },
-  {
-    id: 3,
-    name: "John Smith",
-    profession: "Backend Engineer",
-    content: "Working on a new API.\n\n```js\nconsole.log('Hello Backend!');\n```",
-    imageUrl: "https://via.placeholder.com/600x350",
-    likes: 18,
-    comments: 6,
-  },
-  // Add more dummy posts if needed
-];
+import useFetchPost from "../../hooks/useFetchPosts";
 
 const PostContainer = () => {
   const [posts, setPosts] = useState([]);
+  const allPosts = useFetchPost(); // Assumes `useFetchPost` returns { data: [...] }
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setPosts(dummyPosts);
-    }, 300);
-    return () => clearTimeout(timeout);
-  }, []);
+    if (allPosts?.data && Array.isArray(allPosts.data)) {
+      setPosts(allPosts.data);
+    }
+  }, [allPosts]);
 
   return (
-    <div className="w-full max-h-[70vh] overflow-y-auto pr-2 flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 max-h-[70vh] overflow-y-auto pr-2">
       {/* Header */}
-      <div className="flex items-center justify-between border-b pb-3 mb-2">
+      <div className="sticky top-0 bg-white z-10 flex items-center justify-between border-b pb-3 mb-2">
         <div className="flex items-center gap-2">
           <Sparkles className="text-blue-500 w-5 h-5" />
           <h2 className="text-lg font-semibold text-gray-700">Latest Posts</h2>
@@ -62,13 +32,14 @@ const PostContainer = () => {
       {posts.length > 0 ? (
         posts.map((post) => (
           <PostCard
-            key={post.id}
-            name={post.name}
-            profession={post.profession}
-            content={post.content}
-            imageUrl={post.imageUrl}
-            likes={post.likes}
-            comments={post.comments}
+            key={post?.id}
+            name={`${post?.users_permissions_user?.FirstName || ""} ${
+              post?.users_permissions_user?.LastName || ""
+            }`}
+            profession={post?.users_permissions_user?.Proffesion || "Unknown"}
+            content={post?.content || ""}
+            likes={post?.likes || 0}
+            comments={post?.Comments?.length || 0}
           />
         ))
       ) : (

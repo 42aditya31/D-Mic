@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/D-MIC Logo.png";
 
 const Navbar = () => {
@@ -8,22 +9,49 @@ const Navbar = () => {
       {/* Logo and Branding */}
       <div className="flex items-center justify-between">
         <div className="text-3xl flex items-center gap-3 font-bold text-gray-700 tracking-wide">
-          <img className="h-12" src={logo} alt="logo" />
-          D<span className="text-black">-Mic</span>
+          <img className="h-12" src={logo} alt="logo" />D
+          <span className="text-black">-Mic</span>
         </div>
       </div>
 
       {/* Navigation Links and Button */}
       <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-center gap-6">
         <ul className="flex flex-col md:flex-row items-center gap-6 text-gray-700 font-medium">
-          <li className="hover:text-blue-600 transition">
-            <Link to="/">Home</Link>
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold"
+                  : "hover:text-blue-600 transition"
+              }
+            >
+              Home
+            </NavLink>
           </li>
-          <li className="hover:text-blue-600 transition">
-            <Link to="/about">About</Link>
+          <li>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold"
+                  : "hover:text-blue-600 transition"
+              }
+            >
+              About
+            </NavLink>
           </li>
-          <li className="hover:text-blue-600 transition">
-            <Link to="/profile">Profile</Link>
+          <li>
+            <NavLink
+              to="/profile"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold"
+                  : "hover:text-blue-600 transition"
+              }
+            >
+              Profile
+            </NavLink>
           </li>
         </ul>
 

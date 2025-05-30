@@ -4,7 +4,7 @@ import logo from "../../assets/D-MIC Logo.png";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-white shadow-md px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between">
+    <nav className="w-full top-0 bg-white shadow-md px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between">
       {/* Logo and Branding */}
       <div className="flex items-center justify-between">
         <div className="text-3xl flex items-center gap-3 font-bold text-gray-700 tracking-wide">

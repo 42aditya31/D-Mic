@@ -5,7 +5,7 @@ import { FaUserAlt } from "react-icons/fa";
 
 const ProfileCard = ({ firstName, lastName, profession, email, url }) => {
   return (
-    <div className="w-full bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+    <div className="w-full  bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
       {/* Cover Banner */}
       <div className="h-[90px] bg-gray-800"></div>
 

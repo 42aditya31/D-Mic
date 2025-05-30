@@ -3,6 +3,7 @@ import ProfileCard from "../../Pages/Profile/ProfileCard";
 import { useSelector } from "react-redux";
 import useFetchLoggedUser from "../../hooks/useFetchLoggedUser";
 import AddPost from "../Post/AddPost";
+import PostContainer from "../Post/PostContainer";
 
 const Body = () => {
   const user = useSelector((store) => store.user.userInfo);
@@ -22,14 +23,13 @@ const Body = () => {
           />
         </aside>
 
-   
+        {/* Main Content */}
+        <main className="w-full md:w-2/3 lg:w-3/4 flex flex-col gap-4">
+          <AddPost />
 
-        {/* Optional Main Content */}
-        <main className="w-full md:w-2/3 lg:w-3/4">
-        <AddPost/>
-          {/* Placeholder - You can replace this with any component */}
-          <div className="w-full h-64 bg-white rounded-xl shadow-sm flex items-center justify-center text-gray-500 text-lg">
-           
+          {/* Now no fixed height or overflow-hidden */}
+          <div className="bg-white rounded-xl shadow-sm px-2 py-4">
+            <PostContainer />
           </div>
         </main>
       </div>

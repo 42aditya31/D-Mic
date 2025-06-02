@@ -3,6 +3,7 @@ import PostCard from "./PostCard";
 import useUserPost from "../../hooks/useUsersPost";
 import { useSelector } from "react-redux";
 import { Sparkles } from "lucide-react"; // optional icon (Lucide)
+import AddPost from "./AddPost";
 
 const ProfilePostContainer = () => {
   const [posts, setPosts] = useState([]);
@@ -28,14 +29,12 @@ const ProfilePostContainer = () => {
             Total: {posts.length} {posts.length === 1 ? "post" : "posts"}
           </span>
         )}
-        {/* Optional: Uncomment to add a "New Post" button
-        <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded-md">
-          + New Post
-        </button>
-        */}
+        {/* Optional: Uncomment to add a "New Post" button */}
+        <AddPost name="New Post"/>
+       
       </div>
 
-      {/* Posts Feed */}
+      
       <div className="flex flex-col gap-4 overflow-y-auto max-h-[70vh] pr-2">
         {posts?.length > 0 ? (
           posts.map((post) => (

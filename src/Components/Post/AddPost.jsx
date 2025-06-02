@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-const AddPost = () => {
+const AddPost = ({name}) => {
   const [content, setContent] = useState('');
   const [published, setPublished] = useState('');
   const [userId, setUserId] = useState('');
@@ -9,7 +9,7 @@ const AddPost = () => {
   const [preview, setPreview] = useState(false);
   const containerRef = useRef(null);
 
-  // Set today's date and user ID on mount
+
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0];
     setPublished(today);
@@ -64,9 +64,9 @@ const AddPost = () => {
     <div className="relative mb-8">
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
+        className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-md hover:bg-blue-700"
       >
-        Create Post
+        {name}
       </button>
 
       {isOpen && (

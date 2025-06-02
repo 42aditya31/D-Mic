@@ -27,9 +27,9 @@ const Body = () => {
 
         {/* Main Content */}
         <main className="w-full md:w-2/3 lg:w-3/4 flex flex-col gap-4">
-          <AddPost />
+          <AddPost  name="Create Post"/>
           <div className="bg-white rounded-xl shadow-sm px-2 py-4">
-            <PostContainer />
+            <PostContainer  />
           </div>
         </main>
       </div>

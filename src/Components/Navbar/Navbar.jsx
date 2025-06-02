@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <nav className="w-full bottom-0 bg-white shadow-md px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between">
       {/* Logo and Branding */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between ml-[55px] "  >
         <div className="text-3xl flex items-center gap-3 font-bold text-gray-700 tracking-wide">
           <img className="h-12" src={logo} alt="logo" />
           D<span className="text-black">-Mic</span>

@@ -1,24 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ReactMarkdown from 'react-markdown';
+import React, { useState, useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
 
-const AddPost = ({name}) => {
-  const [content, setContent] = useState('');
-  const [published, setPublished] = useState('');
-  const [userId, setUserId] = useState('');
+const AddPost = ({ name }) => {
+  const [content, setContent] = useState("");
+  const [published, setPublished] = useState("");
+  const [userId, setUserId] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [preview, setPreview] = useState(false);
   const containerRef = useRef(null);
 
-
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toISOString().split("T")[0];
     setPublished(today);
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user?.id) {
       setUserId(user.id);
     } else {
-      console.warn('No user found in localStorage');
+      console.warn("No user found in localStorage");
     }
   }, []);
 
@@ -28,17 +27,17 @@ const AddPost = ({name}) => {
     const payload = {
       data: {
         content,
-        likes: '0',
+        likes: "0",
         published,
         users_permissions_user: userId,
       },
     };
 
     try {
-      const response = await fetch('http://localhost:1337/api/articles', {
-        method: 'POST',
+      const response = await fetch("http://localhost:1337/api/articles", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
@@ -46,17 +45,17 @@ const AddPost = ({name}) => {
       const data = await response.json();
 
       if (response.ok) {
-        alert('✅ Post added successfully!');
-        setContent('');
+        alert("✅ Post added successfully!");
+        setContent("");
         setIsOpen(false);
         setPreview(false);
       } else {
-        console.error('❌ Error:', data);
-        alert('Something went wrong!');
+        console.error("❌ Error:", data);
+        alert("Something went wrong!");
       }
     } catch (error) {
-      console.error('❌ Error:', error);
-      alert('Failed to post data!');
+      console.error("❌ Error:", error);
+      alert("Failed to post data!");
     }
   };
 
@@ -85,7 +84,6 @@ const AddPost = ({name}) => {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex items-start gap-3">
-               
                 <textarea
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -104,7 +102,7 @@ const AddPost = ({name}) => {
                     onClick={() => setPreview(!preview)}
                     className="text-blue-600 hover:underline"
                   >
-                    {preview ? 'Hide Preview' : 'Preview'}
+                    {preview ? "Hide Preview" : "Preview"}
                   </button>
                   <button
                     type="submit"
@@ -117,7 +115,9 @@ const AddPost = ({name}) => {
 
               {preview && (
                 <div className="mt-4 border-t pt-3">
-                  <h4 className="font-semibold text-gray-700 mb-2">Live Preview</h4>
+                  <h4 className="font-semibold text-gray-700 mb-2">
+                    Live Preview
+                  </h4>
                   <div className="prose prose-sm max-w-full text-gray-800">
                     <ReactMarkdown>{content}</ReactMarkdown>
                   </div>

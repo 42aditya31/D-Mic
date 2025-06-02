@@ -34,7 +34,7 @@ const ProfileCard = ({ firstName, lastName, profession, email, url }) => {
         <p className="text-sm text-gray-600 mt-1">{email}</p>
 
         <Link to="/profile">
-          <button className="mt-3 px-4 py-1 text-sm font-medium text-black border border-blue-600 rounded-full hover:bg-blue-50 transition">
+          <button className="mt-3 px-4 py-1 text-sm font-medium text-black border border-blue-600 rounded-full hover:bg-blue-50 cursor-pointer transition">
             View Profile
           </button>
         </Link>

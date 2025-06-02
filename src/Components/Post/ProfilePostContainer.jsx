@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import useUserPost from "../../hooks/useUsersPost";
 import { useSelector } from "react-redux";
-import { Sparkles } from "lucide-react"; // optional icon (Lucide)
+import { Sparkles } from "lucide-react";
 import AddPost from "./AddPost";
 
 const ProfilePostContainer = () => {
@@ -29,12 +29,10 @@ const ProfilePostContainer = () => {
             Total: {posts.length} {posts.length === 1 ? "post" : "posts"}
           </span>
         )}
-        {/* Optional: Uncomment to add a "New Post" button */}
-        <AddPost name="New Post"/>
-       
+        
+        <AddPost name="New Post" />
       </div>
 
-      
       <div className="flex flex-col gap-4 overflow-y-auto max-h-[70vh] pr-2">
         {posts?.length > 0 ? (
           posts.map((post) => (

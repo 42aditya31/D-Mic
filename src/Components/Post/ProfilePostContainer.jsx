@@ -6,7 +6,7 @@ import { Sparkles } from "lucide-react"; // optional icon (Lucide)
 
 const ProfilePostContainer = () => {
   const [posts, setPosts] = useState([]);
-  const user = useSelector((store) => store.user.userInfo);
+  const user = useSelector((store) => store.user.user);
   const userPost = useUserPost(user?.id);
 
   useEffect(() => {

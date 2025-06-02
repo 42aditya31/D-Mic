@@ -5,7 +5,7 @@ import useFetchLoggedUser from "../../hooks/useFetchLoggedUser";
 import ProfilePostContainer from "../../Components/Post/ProfilePostContainer";
 
 const Profile = () => {
-  const user = useSelector((store) => store.user.userInfo);
+  const user = useSelector((store) => store.user.user);
   const userInfo = useFetchLoggedUser(user?.id);
 
   return (

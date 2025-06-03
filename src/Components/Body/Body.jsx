@@ -4,11 +4,12 @@ import ProfileCard from "../../Pages/Profile/ProfileCard";
 import AddPost from "../Post/AddPost";
 import PostContainer from "../Post/PostContainer";
 import useFetchLoggedUser from "../../hooks/useFetchLoggedUser";
+// import AddComment from "../CommentLike/AddComment";
 
 const Body = () => {
   const user = useSelector((store) => store.user.user);
  const userInfo = useFetchLoggedUser(user?.id)
-  console.log(userInfo)
+  // console.log(userInfo)
 
   return (
     <div className="w-full flex justify-center px-4 py-6 bg-gray-50 min-h-screen">
@@ -28,6 +29,7 @@ const Body = () => {
         {/* Main Content */}
         <main className="w-full sm:m-auto md:w-2/3 lg:w-3/4 flex flex-col gap-4">
           <AddPost  name="Create Post"/>
+          {/* <AddComment userId={3} postId={1} onCommentPosted={() => console.log("Comment posted!")} /> */}
           <div className="bg-white rounded-xl shadow-sm px-2 py-4">
             <PostContainer  />
           </div>

@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import { Sparkles } from "lucide-react";
 import useFetchPost from "../../hooks/useFetchPosts";
+import AddComment from "../CommentLike/AddComment";
+import { addPostInfo } from "../../store/postSlice";
+import { useDispatch } from "react-redux";
 
 const PostContainer = () => {
+  const dispatch = useDispatch();
   const [posts, setPosts] = useState([]);
   const allPosts = useFetchPost(); // Assumes `useFetchPost` returns { data: [...] }
-
   useEffect(() => {
     if (allPosts?.data && Array.isArray(allPosts.data)) {
       setPosts(allPosts.data);
-    }
-  }, [allPosts]);
-
+      }
+      }, [allPosts]);
+      
+      dispatch(addPostInfo(posts))
   return (
     <div className="w-full flex flex-col gap-4 max-h-[70vh] overflow-y-auto pr-2">
       {/* Header */}
@@ -31,6 +35,7 @@ const PostContainer = () => {
       {/* Post Feed */}
       {posts.length > 0 ? (
         posts.map((post) => (
+          
           <PostCard
             key={post?.id}
             name={`${post?.users_permissions_user?.FirstName || ""} ${
@@ -40,7 +45,9 @@ const PostContainer = () => {
             content={post?.content || ""}
             likes={post?.likes || 0}
             comments={post?.Comments?.length || 0}
-          />
+            />
+            
+          
         ))
       ) : (
         <div className="text-center mt-10 text-gray-500">

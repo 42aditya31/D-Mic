@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { MessageCircle, Heart } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import AddComment from "../CommentLike/AddComment";
+import CommentSection from "../CommentLike/CommentSection";
 
-const PostCard = ({
-  name,
-  profession,
-  content,
-  likes = 0,
-  comments = 0,
-}) => {
+const PostCard = ({ name, profession, content, likes = 0 }) => {
+  const [isCommentSection, setIsCommentSection] = useState(false);
+
+  const handleComment = () => {
+    setIsCommentSection((prev) => !prev); // toggle visibility
+  };
+
   return (
     <div className="w-full max-w-2xl bg-white border rounded-xl p-4 shadow-sm hover:shadow-md transition">
       <div className="flex items-start space-x-4">
@@ -33,10 +35,25 @@ const PostCard = ({
             <div className="flex items-center space-x-1 cursor-pointer hover:text-red-500 transition">
               <Heart size={18} /> <span>{likes}</span>
             </div>
-            <div className="flex items-center space-x-1 cursor-pointer hover:text-blue-500 transition">
-              <MessageCircle size={18} /> <span>{comments}</span>
+            <div
+              className="flex items-center space-x-1 cursor-pointer hover:text-blue-500 transition"
+              onClick={handleComment}
+            >
+              <MessageCircle size={18} /> <span>comments</span>
             </div>
           </div>
+
+          
+          {isCommentSection && (
+            <div className="mt-4">
+              <CommentSection/>
+              <AddComment
+                userId={3}
+                postId={1}
+                onCommentPosted={() => console.log("Comment posted!")}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

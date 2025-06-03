@@ -42,7 +42,7 @@ const ProfilePostContainer = () => {
                 post?.users_permissions_user?.LastName || ""
               }`}
               profession={post?.users_permissions_user?.Proffesion}
-              content={post.content}
+              content={post.Content}
               imageUrl={post.imageUrl || ""}
               likes={post.likes}
               comments={post.Comments?.length || 0}

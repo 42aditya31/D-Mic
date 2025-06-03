@@ -9,10 +9,11 @@ import { useDispatch } from "react-redux";
 const PostContainer = () => {
   const dispatch = useDispatch();
   const [posts, setPosts] = useState([]);
-  const allPosts = useFetchPost(); // Assumes `useFetchPost` returns { data: [...] }
+  const allPosts = useFetchPost(); 
   useEffect(() => {
-    if (allPosts?.data && Array.isArray(allPosts.data)) {
-      setPosts(allPosts.data);
+    if (allPosts?.data && Array.isArray(allPosts?.data)) {
+      console.log(allPosts?.data)
+      setPosts(allPosts?.data);
       }
       }, [allPosts]);
       
@@ -42,7 +43,7 @@ const PostContainer = () => {
               post?.users_permissions_user?.LastName || ""
             }`}
             profession={post?.users_permissions_user?.Proffesion || "Unknown"}
-            content={post?.content || ""}
+            content={post?.Content || ""}
             likes={post?.likes || 0}
             comments={post?.Comments?.length || 0}
             />

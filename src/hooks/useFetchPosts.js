@@ -4,7 +4,7 @@ const useFetchPost = () => {
 
   const [allPost, setallPost] = useState();
   useEffect(() => {
-    const url = "http://localhost:1337/api/articles?populate=*";
+    const url = "http://localhost:1337/api/posts?populate=*";
 
     const fetchData = async () => {
       const res = await fetch(url);

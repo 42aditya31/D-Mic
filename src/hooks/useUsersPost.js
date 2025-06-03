@@ -4,7 +4,7 @@ const useUserPost = (userId) => {
 
   const [userPost, setUserPost] = useState();
   useEffect(() => {
-    const url = "http://localhost:1337/api/articles?filters[users_permissions_user][id][$eq]=" + userId + "&populate=*";
+    const url = "http://localhost:1337/api/posts?filters[users_permissions_user][id][$eq]=" + userId + "&populate=*";
 
     const fetchData = async () => {
       const res = await fetch(url);

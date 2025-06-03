@@ -24,17 +24,25 @@ const AddPost = ({ name }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      data: {
-        content,
-        likes: "0",
-        published,
-        users_permissions_user: userId,
-      },
-    };
+   const payload = {
+  data: {
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          Content: [{ type: "text", text: content }],
+        },
+      ],
+    },
+    published,
+    users_permissions_user: userId,
+  },
+};
+
 
     try {
-      const response = await fetch("http://localhost:1337/api/articles", {
+      const response = await fetch("http://localhost:1337/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

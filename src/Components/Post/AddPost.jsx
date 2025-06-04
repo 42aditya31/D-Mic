@@ -33,7 +33,7 @@ const AddPost = ({ name }) => {
     const payload = {
       data: {
         Content: content,
-        users_permissions_user: { id: userId },
+        users_permissions_user: userId ,
       },
     };
   

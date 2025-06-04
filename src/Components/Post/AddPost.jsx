@@ -1,46 +1,42 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
+import { useSelector } from "react-redux";
 
 const AddPost = ({ name }) => {
   const [content, setContent] = useState("");
-  const [published, setPublished] = useState("");
   const [userId, setUserId] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [preview, setPreview] = useState(false);
   const containerRef = useRef(null);
 
-  useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
-    setPublished(today);
+  const user = useSelector((store) => store.user.user);
+  // console.log(user)
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user?.id) {
-      setUserId(user.id);
+  useEffect(() => {
+    if (user && user.id) {
+      setUserId(user?.id);
+      // console.log("User ID set:", user.id);
     } else {
-      console.warn("No user found in localStorage");
+      console.warn("User is not available");
     }
-  }, []);
+  }, [user]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-   const payload = {
-  data: {
-    content: {
-      type: "doc",
-      content: [
-        {
-          type: "paragraph",
-          Content: [{ type: "text", text: content }],
-        },
-      ],
-    },
-    published,
-    users_permissions_user: userId,
-  },
-};
-
-
+  
+    if (!userId) {
+      alert("User ID not found. Cannot submit post.");
+      return;
+    }
+  
+    const payload = {
+      data: {
+        Content: content,
+        users_permissions_user: { id: userId },
+      },
+    };
+  
     try {
       const response = await fetch("http://localhost:1337/api/posts", {
         method: "POST",
@@ -49,23 +45,24 @@ const AddPost = ({ name }) => {
         },
         body: JSON.stringify(payload),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        alert("✅ Post added successfully!");
+        alert("Post added successfully!");
         setContent("");
         setIsOpen(false);
         setPreview(false);
       } else {
-        console.error("❌ Error:", data);
+        console.error("Error:", data);
         alert("Something went wrong!");
       }
     } catch (error) {
-      console.error("❌ Error:", error);
+      console.error("Error:", error);
       alert("Failed to post data!");
     }
   };
+  
 
   return (
     <div className="relative mb-8">
@@ -91,19 +88,16 @@ const AddPost = ({ name }) => {
             </button>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="flex items-start gap-3">
-                <textarea
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder="What do you want to talk about?"
-                  className="w-full border border-gray-300 rounded-md p-3 h-32 focus:outline-blue-500 resize-none"
-                  autoFocus
-                  required
-                />
-              </div>
+              <textarea
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="What do you want to talk about?"
+                className="w-full border border-gray-300 rounded-md p-3 h-32 focus:outline-blue-500 resize-none"
+                autoFocus
+                required
+              />
 
               <div className="flex justify-between items-center text-sm text-gray-500">
-                <span>{published}</span>
                 <div className="flex gap-3">
                   <button
                     type="button"
@@ -123,9 +117,7 @@ const AddPost = ({ name }) => {
 
               {preview && (
                 <div className="mt-4 border-t pt-3">
-                  <h4 className="font-semibold text-gray-700 mb-2">
-                    Live Preview
-                  </h4>
+                  <h4 className="font-semibold text-gray-700 mb-2">Live Preview</h4>
                   <div className="prose prose-sm max-w-full text-gray-800">
                     <ReactMarkdown>{content}</ReactMarkdown>
                   </div>

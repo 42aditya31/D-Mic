@@ -11,10 +11,10 @@ const Comment = ({ postId }) => {
       setError("");
   
       try {
-        const res = await fetch("http://localhost:1337/api/articles/:"+ postId);
+        const res = await fetch("http://localhost:1337/api/posts/:"+ postId);
         if (!res.ok) throw new Error("Failed to fetch post");
         const data = await res.json();
-        console.log("Fetched Post:", data);
+        // console.log("Fetched Post:", data);
         setPost(data?.data);
       } catch (error) {
         console.error("Fetch error:", error);

@@ -12,7 +12,7 @@ const PostContainer = () => {
   const allPosts = useFetchPost(); 
   useEffect(() => {
     if (allPosts?.data && Array.isArray(allPosts?.data)) {
-      console.log(allPosts?.data)
+      // console.log(allPosts?.data)
       setPosts(allPosts?.data);
       }
       }, [allPosts]);

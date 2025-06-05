@@ -39,6 +39,7 @@ const PostContainer = () => {
           
           <PostCard
             key={post?.id}
+            postId={post?.id}
             name={`${post?.users_permissions_user?.FirstName || ""} ${
               post?.users_permissions_user?.LastName || ""
             }`}

@@ -1,14 +1,19 @@
-import React from 'react'
-import CommentContainer from './CommentContainer'
-import AddComment from './AddComment'
+import React from "react";
+import CommentContainer from "./CommentContainer";
+import AddComment from "./AddComment";
 
 const CommentSection = () => {
   return (
     <div>
       {/* <AddComment/> */}
-      <CommentContainer/>
+      <AddComment
+        userId={3}
+        postId={1}
+        onCommentPosted={() => console.log("Comment posted!")}
+      />
+      <CommentContainer />
     </div>
-  )
-}
+  );
+};
 
-export default CommentSection
+export default CommentSection;

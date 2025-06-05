@@ -3,12 +3,16 @@ import { MessageCircle, Heart } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import AddComment from "../CommentLike/AddComment";
 import CommentSection from "../CommentLike/CommentSection";
+import { useDispatch } from "react-redux";
+import { addPostId } from "../../store/postSlice";
 
-const PostCard = ({ name, profession, content,publishedAt, likes = 0 }) => {
+const PostCard = ({ name, profession, content,publishedAt,postId, likes = 0 }) => {
   const [isCommentSection, setIsCommentSection] = useState(false);
+  const dispatch = useDispatch()
 
   const handleComment = () => {
-    setIsCommentSection((prev) => !prev); // toggle visibility
+    setIsCommentSection((prev) => !prev);
+    dispatch(addPostId(postId))
   };
 
   return (
@@ -47,11 +51,6 @@ const PostCard = ({ name, profession, content,publishedAt, likes = 0 }) => {
           {isCommentSection && (
             <div className="mt-4">
               <CommentSection/>
-              <AddComment
-                userId={3}
-                postId={1}
-                onCommentPosted={() => console.log("Comment posted!")}
-              />
             </div>
           )}
         </div>

@@ -1,27 +1,42 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
-const AddComment = ({  onCommentPosted }) => {
+const AddComment = ({ onCommentPosted }) => {
   const [commentText, setCommentText] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const userId = useSelector((store) => store.user.user);
-  const postId = useSelector((store)=>store.post.post)
+
+  // ✅ Safely extract userId and postId with fallback to null
+  const userId = useSelector((store) => store?.user?.user?.id ?? null);
+  const postId = useSelector((store) => store?.post?.postId ?? null);
+
+  // console.log(userId)
+  // console.log(postId)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!commentText.trim()) return;
+    //  Prevent if comment is empty or user/post IDs are missing
+    if (!commentText.trim() || !userId || !postId) {
+      setError("User or post not found. Cannot comment.");
+      return;
+    }
 
     const payload = {
       data: {
         comment: [
           {
             type: "paragraph",
-            children: [{ type: "text", text: commentText }],
+            children: [
+              {
+                type: "text",
+                text: commentText.trim(),
+              },
+            ],
           },
         ],
-        users_permissions_user: userId.toString(),
-        post: postId.toString(),
+        users_permissions_user: String(userId),
+        post: String(postId),
       },
     };
 
@@ -42,8 +57,8 @@ const AddComment = ({  onCommentPosted }) => {
         throw new Error(err?.error?.message || "Failed to post comment");
       }
 
-      setCommentText("");
-      if (onCommentPosted) onCommentPosted();
+      setCommentText(""); //  Clear input
+      if (onCommentPosted) onCommentPosted(); //  Notify parent
     } catch (err) {
       setError("Failed to post comment. Try again.");
       console.error(err);

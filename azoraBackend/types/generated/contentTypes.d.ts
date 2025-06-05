@@ -424,6 +424,7 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
       'api::comment.comment'
     > &
       Schema.Attribute.Private;
+    post: Schema.Attribute.Relation<'manyToOne', 'api::post.post'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -506,6 +507,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
   };
   attributes: {
     comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
+    Comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
     Content: Schema.Attribute.RichText & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

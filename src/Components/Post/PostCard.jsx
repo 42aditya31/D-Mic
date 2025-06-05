@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import AddComment from "../CommentLike/AddComment";
 import CommentSection from "../CommentLike/CommentSection";
 
-const PostCard = ({ name, profession, content, likes = 0 }) => {
+const PostCard = ({ name, profession, content,publishedAt, likes = 0 }) => {
   const [isCommentSection, setIsCommentSection] = useState(false);
 
   const handleComment = () => {
@@ -22,7 +22,7 @@ const PostCard = ({ name, profession, content, likes = 0 }) => {
           {/* Name & Profession */}
           <div className="mb-1">
             <h3 className="text-base font-semibold text-gray-900">{name}</h3>
-            <p className="text-sm text-gray-500">{profession}</p>
+            <p className="text-sm text-gray-500">{profession}</p> <span>{publishedAt}</span>
           </div>
 
           {/* Post Content */}

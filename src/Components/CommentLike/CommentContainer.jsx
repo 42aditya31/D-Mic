@@ -4,7 +4,7 @@ import Comment from './Comment'
 const CommentContainer = () => {
   return (
     <div>
-      <Comment postId="5"/>
+      <Comment postId="9"/>
     </div>
   )
 }

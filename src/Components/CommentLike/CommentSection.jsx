@@ -5,7 +5,7 @@ import AddComment from './AddComment'
 const CommentSection = () => {
   return (
     <div>
-      <AddComment/>
+      {/* <AddComment/> */}
       <CommentContainer/>
     </div>
   )

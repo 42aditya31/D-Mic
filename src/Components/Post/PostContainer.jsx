@@ -46,6 +46,7 @@ const PostContainer = () => {
             content={post?.Content || ""}
             likes={post?.likes || 0}
             comments={post?.Comments?.length || 0}
+            publishedAt={post?.publishedAt}
             />
             
           

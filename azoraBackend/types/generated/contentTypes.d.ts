@@ -471,6 +471,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 export interface ApiLikeLike extends Struct.CollectionTypeSchema {
   collectionName: 'likes';
   info: {
+    description: '';
     displayName: 'Like';
     pluralName: 'likes';
     singularName: 'like';

@@ -9,12 +9,12 @@ const ProfilePostContainer = () => {
   const [posts, setPosts] = useState([]);
   const user = useSelector((store) => store.user.user);
   const userPost = useUserPost(user?.id);
-
   useEffect(() => {
-    if (userPost?.data) {
-      setPosts(userPost.data);
+    if (userPost?.data && Array.isArray(userPost.data)) {
+      setPosts([...userPost.data].reverse());
     }
   }, [userPost?.data]);
+  
 
   return (
     <div className="flex flex-col gap-4 h-full">
@@ -29,7 +29,7 @@ const ProfilePostContainer = () => {
             Total: {posts.length} {posts.length === 1 ? "post" : "posts"}
           </span>
         )}
-        
+
         <AddPost name="New Post" />
       </div>
 
@@ -38,14 +38,16 @@ const ProfilePostContainer = () => {
           posts.map((post) => (
             <PostCard
               key={post.id}
+              postId={post.id}
               name={`${post?.users_permissions_user?.FirstName || ""} ${
                 post?.users_permissions_user?.LastName || ""
               }`}
-              profession={post?.users_permissions_user?.Proffesion}
-              content={post.Content}
-              imageUrl={post.imageUrl || ""}
-              likes={post.likes}
-              comments={post.Comments?.length || 0}
+              profession={post?.users_permissions_user?.Proffesion || "Unknown"}
+              content={post?.Content}
+              likes={post?.likes?.[0]?.LikeCount || 0}
+              likeId={post?.likes?.[0]?.id || null}
+              comments={post?.Comments?.length || 0}
+              publishedAt={post?.publishedAt}
             />
           ))
         ) : (
@@ -54,10 +56,6 @@ const ProfilePostContainer = () => {
             <p className="text-sm mt-1">
               Start sharing your thoughts, ideas, or updates here.
             </p>
-            {/* Optional CTA */}
-            {/* <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
-              Create Your First Post
-            </button> */}
           </div>
         )}
       </div>

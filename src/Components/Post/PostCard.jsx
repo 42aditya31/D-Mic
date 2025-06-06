@@ -24,6 +24,8 @@ const PostCard = ({
   const user = useSelector((store) => store?.user?.user);
   const timeAgo = useTimeAgo(publishedAt);
 
+  const token = localStorage.getItem("token")
+
   const handleToggleCommentSection = () => {
     setIsCommentSectionVisible((prev) => !prev);
     dispatch(addPostId(postId));
@@ -55,7 +57,6 @@ const PostCard = ({
       console.error("Like error:", err.message);
     }
   };
-
   const handleDelete = async () => {
     try {
       console.log("Trying to delete post with ID:", postId);
@@ -64,6 +65,11 @@ const PostCard = ({
         `http://localhost:1337/api/posts/${Number(postId)}`,
         {
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            // Only if auth is needed:
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
   
@@ -74,15 +80,18 @@ const PostCard = ({
       }
   
       console.log("Post deleted successfully");
-      // Optional: Trigger UI update
+  
+      // // Optional: update UI
+      // if (onPostDeleted) onPostDeleted(postId);
     } catch (error) {
       console.error("Error deleting post:", error);
     }
   };
   
+  
 
   return (
-<div className="w-full max-w-2xl bg-white border border-gray-200 rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition duration-200">
+<div className="w-full max-w-2xl bg-white border border-gray-200 rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition duration-y200">
   <div className="flex flex-col sm:flex-row items-start gap-4">
     <div className="w-12 h-12 bg-gray-300 rounded-full flex-shrink-0" />
     <div className="flex-1 w-full">

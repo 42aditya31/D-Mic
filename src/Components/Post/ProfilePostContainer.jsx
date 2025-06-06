@@ -14,8 +14,7 @@ const ProfilePostContainer = () => {
       setPosts([...userPost.data].reverse());
     }
   }, [userPost?.data]);
-
-  // console.log(posts?.users_permissions_user)
+  console.log(posts)
   
 
   return (

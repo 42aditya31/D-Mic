@@ -24,9 +24,9 @@ const PostCard = ({
   const dispatch = useDispatch();
   const user = useSelector((store) => store?.user?.user);
   const timeAgo = useTimeAgo(publishedAt);
-
+const userId = localStorage.getItem("userId")
   const token = localStorage.getItem("token")
-
+  const userId_PostId = localStorage.getItem(`savedPosts_${userId}`)
   const handleToggleCommentSection = () => {
     setIsCommentSectionVisible((prev) => !prev);
     dispatch(addPostId(postId));
@@ -139,7 +139,7 @@ const toggleSavePost = (postId) => {
  
   <div
     className={`flex items-center gap-1 cursor-pointer transition ${
-      savedPosts.includes(postId)
+      userId_PostId.includes(postId)
         ? "text-yellow-500 hover:text-yellow-600"
         : "text-gray-500 hover:text-yellow-500"
     }`}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
-import { Sparkles } from "lucide-react";
+import { Sparkles, StarHalf, StarIcon, Stars, WandSparklesIcon } from "lucide-react";
 import useFetchPost from "../../hooks/useFetchPosts";
 import { addPostInfo } from "../../store/postSlice";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ const PostContainer = () => {
     <div className="w-full -mt-6 flex flex-col gap-4 max-h-[70vh] overflow-y-auto pr-2">
       <div className="sticky top-0 bg-white z-10 flex items-center justify-between border-b pb-3 mb-2">
         <div className="flex items-center gap-2">
-          <Sparkles className="text-blue-500 w-5 h-5" />
+          <Stars className="text-blue-500 w-5 h-5" />
           <h2 className="text-lg font-semibold text-gray-700">Latest Posts</h2>
         </div>
         {posts.length > 0 && (

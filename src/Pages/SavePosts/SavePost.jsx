@@ -94,7 +94,7 @@ const SavePost = () => {
               likeId={post?.likes?.[0]?.id || null}
               comments={post?.Comments?.length || 0}
               publishedAt={post?.publishedAt}
-              currentPostUserId={post?.users_permissions_user?.id}
+              // currentPostUserId={post?.users_permissions_user?.id}
             />
           ))}
         </div>

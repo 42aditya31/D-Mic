@@ -14,6 +14,8 @@ const ProfilePostContainer = () => {
       setPosts([...userPost.data].reverse());
     }
   }, [userPost?.data]);
+
+  // console.log(posts?.users_permissions_user)
   
 
   return (
@@ -39,6 +41,7 @@ const ProfilePostContainer = () => {
             <PostCard
               key={post.id}
               postId={post.id}
+              currentPostUserId={post?.users_permissions_user?.id}
               name={`${post?.users_permissions_user?.FirstName || ""} ${
                 post?.users_permissions_user?.LastName || ""
               }`}

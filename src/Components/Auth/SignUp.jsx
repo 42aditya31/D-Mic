@@ -30,6 +30,7 @@ const SignUp = () => {
           FirstName: input.FirstName,
           LastName: input.LastName,
           Proffesion: input.Proffesion,
+          role:2
         }),
       });
 

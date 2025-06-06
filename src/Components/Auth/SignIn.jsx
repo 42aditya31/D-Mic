@@ -30,6 +30,7 @@ const SignIn = () => {
 
       setToken(data.jwt);
       dispatch(addUserInfo(data.user));
+      localStorage.setItem("userId",data?.user?.id)
       navigate("/");
     } catch (err) {
       alert(err.message);

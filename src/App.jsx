@@ -11,6 +11,7 @@ import About from './Pages/About/About';
 import AuthProvider from './Components/Auth/AuthProvider';
 import PublicRoute from './Components/Auth/PublicRoute';
 import PrivateRoute from './Components/Auth/PrivateRoute';
+import SavePost from './Pages/SavePosts/SavePost';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/" element={<Home />}>
                 <Route index element={<Body />} />
                 <Route path="profile" element={<Profile />} />
+                <Route path="savePosts" element={<SavePost />} />
                 <Route path="about" element={<About />} />
               </Route>
             </Route>

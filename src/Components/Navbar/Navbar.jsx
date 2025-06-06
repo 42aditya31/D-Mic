@@ -65,6 +65,18 @@ const Navbar = () => {
               Profile
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/savePosts"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold"
+                  : "hover:text-blue-600 transition"
+              }
+            >
+              Save Posts
+            </NavLink>
+          </li>
         </ul>
 
        

@@ -6,6 +6,7 @@ import CommentSection from "../CommentLike/CommentSection";
 import { useDispatch, useSelector } from "react-redux";
 import { addPostId } from "../../store/postSlice";
 import useTimeAgo from "../../hooks/useTimeAgo";
+import { savePost, unsavePost } from "../../store/saveSlice";
 
 const PostCard = ({
   name,
@@ -30,6 +31,19 @@ const PostCard = ({
     setIsCommentSectionVisible((prev) => !prev);
     dispatch(addPostId(postId));
   };
+
+
+const savedPosts = useSelector((store) => store.save.savedPosts);
+
+const toggleSavePost = (postId) => {
+  if (savedPosts.includes(postId)) {
+    dispatch(unsavePost(postId));
+  } else {
+    dispatch(savePost(postId));
+  }
+};
+
+
 
   const handleLikeClick = async () => {
     const url = likeId
@@ -108,29 +122,56 @@ const PostCard = ({
       </div>
 
       <div className="flex flex-wrap items-center gap-4 text-gray-600 text-sm border-t border-gray-200 pt-3">
-        <div
-          className="flex items-center gap-1 cursor-pointer hover:text-red-500 transition"
-          onClick={handleLikeClick}
-        >
-          <Heart size={18} /> <span>{likeCount}</span>
-        </div>
+  <div
+    className="flex items-center gap-1 cursor-pointer hover:text-red-500 transition"
+    onClick={handleLikeClick}
+  >
+    <Heart size={18} /> <span>{likeCount}</span>
+  </div>
 
-        <div
-          className="flex items-center gap-1 cursor-pointer hover:text-blue-500 transition"
-          onClick={handleToggleCommentSection}
-        >
-          <MessageCircle size={18} /> <span>{comments}</span>
-        </div>
+  <div
+    className="flex items-center gap-1 cursor-pointer hover:text-blue-500 transition"
+    onClick={handleToggleCommentSection}
+  >
+    <MessageCircle size={18} /> <span>{comments}</span>
+  </div>
 
-        {currentPostUserId === user?.id && (
-          <div
-            className="flex items-center gap-1 cursor-pointer hover:text-red-600 transition text-gray-500"
-            onClick={handleDelete}
-          >
-            <Trash2 size={18} /> <span>Delete</span>
-          </div>
-        )}
-      </div>
+ 
+  <div
+    className={`flex items-center gap-1 cursor-pointer transition ${
+      savedPosts.includes(postId)
+        ? "text-yellow-500 hover:text-yellow-600"
+        : "text-gray-500 hover:text-yellow-500"
+    }`}
+    onClick={() => toggleSavePost(postId)}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill={savedPosts.includes(postId) ? "currentColor" : "none"}
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M5 5v14l7-5 7 5V5a2 2 0 00-2-2H7a2 2 0 00-2 2z"
+      />
+    </svg>
+    <span>{savedPosts.includes(postId) ? "Saved" : "Save"}</span>
+  </div>
+
+  {currentPostUserId === user?.id && (
+    <div
+      className="flex items-center gap-1 cursor-pointer hover:text-red-600 transition text-gray-500"
+      onClick={handleDelete}
+    >
+      <Trash2 size={18} /> <span>Delete</span>
+    </div>
+  )}
+</div>
+
 
       {isCommentSectionVisible && (
         <div className="mt-4">
